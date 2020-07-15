@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "babel src -d build",
-    "start": "npm run build && node build/server.js"
+    "build_frontend": "cd client && npm run build",
+    "start": "npm run build_frontend && npm run build && node build/server.js"
   },
   "author": "",
   "license": "ISC",

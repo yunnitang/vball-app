@@ -10,6 +10,7 @@ class Game{
         this.homeTeam = new Team("home");
         this.visitingTeam = new Team("visiting");
         this.actions = {};
+        this.video_id = "";
         this.initGameData();
     }
 
@@ -24,6 +25,10 @@ class Game{
         } else {
             throw Error("Wrong team specified");
         }
+    }
+
+    addVideoID(id){
+        this.video_id = id;
     }
 
     initGameData(){

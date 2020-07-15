@@ -20,6 +20,9 @@ class Data{
 			}
 		});
 
+		this.games["0"].addVideoID("4nzcNzbwQhc");
+		this.games["1"].addVideoID("4nzcNzbwQhc");
+
 	}
 
 	addGame(id){
