@@ -16,8 +16,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/',routes);
 
+const PORT = process.env.PORT || 8000;
 
-
-server.listen(8000, () => {
-	console.log('Example app listening on port 8000!');
+server.listen(PORT, () => {
+	console.log('Example app listening on port ${ PORT }!');
 });	
