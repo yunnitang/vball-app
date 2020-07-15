@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "preinstall": "cd client && npm install",
     "build": "babel src -d build",
     "build_frontend": "cd client && npm run build",
     "start": "npm run build_frontend && npm run build && node build/server.js"
