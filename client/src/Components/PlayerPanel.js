@@ -16,13 +16,23 @@ class PlayerPanel extends Component {
         var that = this;
         Object.keys(this.props.game_data.homeTeam.players).forEach(function(player_id){
           var currPlayer = that.props.game_data.homeTeam.players[player_id];
-          playerList.push(currPlayer.first_name + " " + currPlayer.last_name);
+          playerList.push({
+            "first_name": currPlayer.first_name,
+            "last_name": currPlayer.last_name,
+            "id": player_id,
+            "team": "homeTeam"
+          });
         });
       } else if(team === "visiting"){
         var that = this;
         Object.keys(this.props.game_data.visitingTeam.players).forEach(function(player_id){
           var currPlayer = that.props.game_data.visitingTeam.players[player_id];
-          playerList.push(currPlayer.first_name + " " + currPlayer.last_name);
+          playerList.push({
+            "first_name": currPlayer.first_name,
+            "last_name": currPlayer.last_name,
+            "id": player_id,
+            "team": "visitingTeam"
+          });
         });
       }
       return playerList;
@@ -36,8 +46,8 @@ class PlayerPanel extends Component {
     const visitingList = this.getPlayerList("visiting");
     return (
       <div className="playerPanel">
-      	<PlayerList name="home" playerNameList={homeList}/>
-      	<PlayerList name="visiting" playerNameList={visitingList}/>
+      	<PlayerList name="home" changeSeek={this.props.changeSeek} playerNameList={homeList}/>
+      	<PlayerList name="visiting" changeSeek={this.props.changeSeek} playerNameList={visitingList}/>
       </div>
     );
   }

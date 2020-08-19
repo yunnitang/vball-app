@@ -20,19 +20,31 @@ class SeekPanel extends Component {
         var teamFiltered = 0;
         var typeFiltered = 0;
 
+
+
+
         if(filter.player_num !== -1){
+          if(filter.player_num != currAction.player_num || 
+             filter.team !== currAction.team
+            ){
             playerFiltered = 1;
-        }
-
-        if(filter.team !== ""){
-            teamFiltered = 1;
-        }
-
-        Object.keys(filter.types).forEach(function(type){
-          if(filter.types[type] !== 1){
-              typeFiltered = 1;
           }
-        });
+        }
+
+        console.log(filter);
+        console.log(currAction);
+        console.log(playerFiltered);
+        console.log("--------------------------");
+
+        //if(filter.team !== ""){
+        //    teamFiltered = 1;
+        //}
+
+        //Object.keys(filter.types).forEach(function(type){
+        //  if(filter.types[type] !== 1){
+        //      typeFiltered = 1;
+        //  }
+        //});
 
         if(!playerFiltered && !teamFiltered && !typeFiltered){
             newActionsList.push(action_id);

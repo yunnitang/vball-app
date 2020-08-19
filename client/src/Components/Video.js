@@ -35,7 +35,6 @@ class Video extends Component {
       this.setState({player: newPlayer});
     }
   }
-
   onPlayerReady(event){
     event.target.seekTo(0,true);
     event.target.playVideo();
@@ -51,7 +50,6 @@ class Video extends Component {
 
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
     } else { // If script is already there, load the video directly
       this.loadVideo();
     }
@@ -59,6 +57,7 @@ class Video extends Component {
 
   componentDidMount(){
     this.loadAPI_and_video();
+
   }
 
   componentDidUpdate(prev){
@@ -75,6 +74,7 @@ class Video extends Component {
     return (
       <div className="video">
         <div id="video__player" class="video__player"></div>
+
       </div>
     );
   }

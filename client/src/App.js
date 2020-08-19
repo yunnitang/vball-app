@@ -26,7 +26,7 @@ class App extends Component {
           Attack: 1,
           Defense: 1,
           Serve: 1,
-          Repection: 1
+          Reception: 1
         },
       },
     };
