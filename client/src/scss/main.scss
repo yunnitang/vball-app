@@ -55,7 +55,13 @@
 		background-color:lightgray;
 		display: flex;
 
-		
+		.checkBox{
+			display: flex;
+			flex-direction: column;
+			height:160px;
+			padding-left: 10px;
+		    justify-content: center;
+		}
 		.seekPanel__horizontalScroll{
 			display: flex;
 			flex-direction: row;
@@ -93,4 +99,5 @@
 	&.sideBar--visible{
 		left: 0px;
 	}
+
 }

@@ -4,9 +4,31 @@ import SeekType from "./SeekType"
 class SeekPanel extends Component {
   constructor(props){
     super(props);
-
+    this.handleClick = this.handleClick.bind(this);
     this.getCurrentActions = this.getCurrentActions.bind(this);
     this.seekVideoTo = this.seekVideoTo.bind(this);
+    this.setCheckBoxes = this.setCheckBoxes.bind(this);
+
+    this.attackCheckRef = React.createRef();
+    this.defenseCheckRef = React.createRef();
+    this.receptionCheckRef = React.createRef();
+    this.serveCheckRef = React.createRef();
+  }
+
+  setCheckBoxes(){
+    this.attackCheckRef.current.checked = this.props.seek_filter.types.Attack == 1 ? true : false;
+    this.defenseCheckRef.current.checked = this.props.seek_filter.types.Defense == 1 ? true : false;
+    this.receptionCheckRef.current.checked = this.props.seek_filter.types.Reception == 1 ? true : false;
+    this.serveCheckRef.current.checked = this.props.seek_filter.types.Serve == 1 ? true : false;
+  }
+
+  componentDidMount(){
+    this.setCheckBoxes();
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log("update")
+      this.setCheckBoxes();
   }
 
   getCurrentActions(){
@@ -30,11 +52,30 @@ class SeekPanel extends Component {
             playerFiltered = 1;
           }
         }
-
-        console.log(filter);
-        console.log(currAction);
-        console.log(playerFiltered);
-        console.log("--------------------------");
+        if(currAction.type === "Attack"){
+          if(filter.types.Attack === 0){
+            typeFiltered = 1;
+          }
+        }
+        if(currAction.type === "Defense"){
+          if(filter.types.Defense === 0){
+            typeFiltered = 1;
+          }
+        }
+        if(currAction.type === "Serve"){
+          if(filter.types.Serve === 0){
+            typeFiltered = 1;
+          }
+        }
+        if(currAction.type === "Reception"){
+          if(filter.types.Reception === 0){
+            typeFiltered = 1;
+          }
+        }
+        // console.log(filter);
+        // console.log(currAction);
+        // console.log(playerFiltered);
+        // console.log("--------------------------");
 
         //if(filter.team !== ""){
         //    teamFiltered = 1;
@@ -61,6 +102,21 @@ class SeekPanel extends Component {
     console.log("SEEKING TO:", seconds);
     this.props.seekVideoTo(seconds);
   }
+  handleClick(type,e){
+    // e.preventDefault();
+    var newSeek = {
+        player_num: this.props.seek_filter.player_num,
+        team: this.props.seek_filter.team,
+        types: {
+          Attack: type === "Attack" ? (this.props.seek_filter.types.Attack + 1 ) % 2 : this.props.seek_filter.types.Attack,
+          Defense: type === "Defense" ?(this.props.seek_filter.types.Defense + 1 ) % 2  : this.props.seek_filter.types.Defense,
+          Serve: type === "Serve" ? (this.props.seek_filter.types.Serve + 1 ) % 2  : this.props.seek_filter.types.Serve,
+          Reception: type === "Reception" ? (this.props.seek_filter.types.Reception + 1 ) % 2  : this.props.seek_filter.types.Reception
+        },
+      };
+    //trigger new Seek change;
+    this.props.changeSeek(newSeek);
+  }
 
   render() {
     const SeekList = [];
@@ -78,6 +134,25 @@ class SeekPanel extends Component {
         <div className="seekPanel__horizontalScroll">
         	{SeekList}
          </div>
+        <div class = "checkBox">
+          
+          <div>
+            <input ref={this.attackCheckRef} type="checkbox" className="checkbox" name="Attack" onClick={this.handleClick.bind(this,"Attack")}></input>
+            <label for="attack">Attack</label>
+          </div>
+          <div>
+          <input ref={this.defenseCheckRef} type="checkbox" className="checkbox" name="Defense" onClick={this.handleClick.bind(this,"Defense")}></input>
+          <label for="Defense">Defense</label>
+          </div>
+          <div>
+          <input ref={this.receptionCheckRef} type="checkbox" className="checkbox" name="Reception" onClick={this.handleClick.bind(this,"Reception")}></input>
+          <label for="Reception">Reception</label>
+          </div>
+          <div>
+          <input ref={this.serveCheckRef} type="checkbox" className="checkbox" name="Serve" onClick={this.handleClick.bind(this,"Serve")}></input>
+          <label for="Serve">Serve</label>
+        </div>
+        </div>
       </div>
     );
   }

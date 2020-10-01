@@ -50,7 +50,9 @@ class App extends Component {
   }
 
   triggerSeekFilterChange(newSeekFilter){
-    this.setState({seek_filter: newSeekFilter})
+    this.setState({seek_filter: newSeekFilter},function(){
+      console.log(this.state);
+    });
   }
 
   seekVideoTo(seconds){
